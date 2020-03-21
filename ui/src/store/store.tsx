@@ -1,5 +1,8 @@
 import React, { Dispatch, Reducer } from "react";
 
+// How to use store
+// https://gist.github.com/SeedyROM/af582797077471270df4c9dcbb18b305#file-examplewithprovider-tsx
+
 const createStore = <S extends {}, A extends {}>(reducer: Reducer<S, A>, initialState: S) => {
   const contextValues: [S, Dispatch<A>] = [initialState, action => {}];
 
@@ -21,9 +24,10 @@ interface InitialState {
 
 const initialState: InitialState = { userID: null, expireToken: null };
 const reducer = (state: InitialState, action: any) => {
+  console.log(state);
   switch (action.type) {
     case "add":
-      return state;
+      return {userID: "testId", expireToken: "3600"};
     default:
       return state;
   }
