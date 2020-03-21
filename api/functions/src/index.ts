@@ -3,23 +3,30 @@ import * as functions from 'firebase-functions';
 import * as express from 'express';
 import * as bodyParser from 'body-parser';
 import * as cors from 'cors';
-import validateFirebaseIdToken from './validateFirebaseIdToken';
-import users from './users';
-import { signUpHandler, deleteAccountHandler } from './auth';
+import { getUsersRoute } from './users';
+import { getHeroesRoute } from './heroes';
+import { getMissionsRoute } from './missions';
+import * as admin from 'firebase-admin';
+import { getSignUpHandler, getDeleteAccountHandler } from './auth';
 
 //initialize firebase inorder to access its services
+admin.initializeApp(functions.config().firebase);
+const db = admin.firestore();
+
 //initialize express server
 const app = express();
 
-//add the path to receive request and set json as bodyParser to process the body
+//apply middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use('/users', validateFirebaseIdToken, users);
-
 app.use(cors({ origin: true }));
 
-export const api = functions.https.onRequest(app);
+export const signUp = getSignUpHandler(db);
 
-export const signUp = signUpHandler;
+export const deleteAccount = getDeleteAccountHandler(db);
 
-export const deleteAccount = deleteAccountHandler;
+export const users = getUsersRoute(app, db);
+
+export const heroes = getHeroesRoute(app, db);
+
+export const missions = getMissionsRoute(app, db);

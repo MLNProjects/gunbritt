@@ -1,51 +1,30 @@
-import * as express from 'express';
-const router = express.Router();
-import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import validateFirebaseIdToken from './middleware/validateFirebaseIdToken';
+import { Application } from 'express';
 
-admin.initializeApp(functions.config().firebase);
+export function getUsersRoute(app: Application, db: FirebaseFirestore.Firestore) {
+	//update user
+	app.put('/users', validateFirebaseIdToken, async (req: any, res: any) => {
+		try {
+			const fieldNames = ['name', 'phoneNumber', 'description'];
 
-const db = admin.firestore();
+			const updatedFields: any = {};
+			fieldNames.forEach(fn => {
+				if (req.body[fn]) {
+					updatedFields[fn] = req.body[fn];
+				}
+			});
 
-//update user
+			const userRef = db.collection('users').doc(req.user);
 
-router.put('/', async (req: any, res: any) => {
-	try {
-		let fieldNames = ['name', 'phoneNumber', 'description'];
+			userRef
+				.update(updatedFields)
+				.then(res.status(201).send(`UpdatedUser: ${req.user}`))
+				.catch(error => res.status(400).send(`Couldnt update user!!!`));
+		} catch (error) {
+			res.status(400).send(`Couldnt update user!!!`);
+		}
+	});
 
-		let updatedFields: any;
-		fieldNames.forEach(fn => {
-			if (req.body[fn]) {
-				updatedFields[fn] = req.body[fn];
-			}
-		});
-
-		let userRef = db.collection('users').doc(req.user);
-
-		userRef.update(updatedFields);
-		res.status(201).send(`UpdatedUser: ${req.user}`);
-	} catch (error) {
-		res.status(400).send(`Couldnt update user!!!`);
-	}
-});
-
-// // // Create new user
-// router.post('/', async (req, res) => {
-// 	try {
-// 		const user: User = {
-// 			name: req.body['name'],
-// 			password: req.body['password'],
-// 			email: req.body['email'],
-// 			phoneNumber: req.body['phoneNumber'],
-// 		};
-
-// 		const newDoc = await db.collection('users').add(user);
-// 		res.status(201).send(`Created a new user: ${newDoc.id}`);
-// 	} catch (error) {
-// 		res.status(400).send(
-// 			`User should cointain firstName, lastName, email, areaNumber, department, id and contactNumber!!!`
-// 		);
-// 	}
-// });
-
-export default router;
+	return functions.https.onRequest(app);
+}
