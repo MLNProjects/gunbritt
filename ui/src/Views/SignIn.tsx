@@ -13,9 +13,9 @@ const SignIn = () => {
       <h1>Quarantine Helper</h1>
       <div>
         <h4>In these uncertain times, people can need help and people can give help. Which one are you?</h4>
-        <Link to="/">Learn more</Link>
+        {/*<Link to="/">Learn more</Link>*/}
       </div>
-      <form onSubmit={handleLogIn}>
+      <form onSubmit={handleLogIn} data-testid="sign-in-form">
         <label>
           email
           <input type="email" name="email" id="email-input" />
@@ -25,7 +25,7 @@ const SignIn = () => {
           <input type="password" name="password" id="password-input" />
         </label>
         <button type="submit">Logga in.</button>
-        <Link to="/registrera">Inget konto? Registrera här.</Link>
+        {/*<Link to="/registrera">Inget konto? Registrera här.</Link>*/}
       </form>
     </div>
   );
