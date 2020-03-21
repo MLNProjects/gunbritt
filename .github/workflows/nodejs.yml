@@ -13,8 +13,6 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
-    env:
-      working-directory: ./ui
 
     strategy:
       matrix:
@@ -26,11 +24,8 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: npm ci
-      working-directory: ${env.working-directory}
+    - run: cd ui && npm ci
     - run: npm run build --if-present
-      working-directory: ${env.working-directory}
     - run: npm test
-      working-directory: ${env.working-directory}
       env:
         CI: true
