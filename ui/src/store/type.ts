@@ -1,0 +1,1 @@
+export const SET_TOKEN_AND_USERID = "SET_TOKEN_AND_USERID";

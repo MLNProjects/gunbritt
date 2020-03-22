@@ -1,10 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { signInWithEmailAndPassword } from "./services";
 
 const SignIn = () => {
-  const handleLogIn = (e: any) => {
+  const handleLogIn = async (e: any) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
+    try {
+      await signInWithEmailAndPassword(email.value, password.value);
+    } catch (err) {
+      console.error("Kunde inte logga in");
+    }
+
     console.log(email.value, password.value);
   };
 
