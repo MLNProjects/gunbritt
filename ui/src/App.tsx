@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import SignIn from "./Views/SignIn/SignIn";
 import SignUp from "./Views/SignUp/SignUp";
 import Landing from "./Views/Landing/Landing";
+import UserInformation from "./Views/UserInformation/UserInformation";
 import "./App.scss";
 
 function App() {
@@ -10,6 +11,9 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
+          <Route exact path="/merinfo">
+            <UserInformation />
+          </Route>
           <Route exact path="/loggain">
             <SignIn />
           </Route>
