@@ -1,0 +1,70 @@
+@import "../../style/colors";
+.container {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  .top-circle {
+    position: absolute;
+    width: 374px;
+    height: 374px;
+    background: $color-pink-bubble;
+    border-radius: 50%;
+    z-index: -1;
+    top: -270px;
+    right: -170px;
+  }
+
+  .bottom-circle {
+    position: absolute;
+    width: 828px;
+    height: 828px;
+    background: $color-blue-bubble;
+    border-radius: 50%;
+    z-index: -1;
+    bottom: -550px;
+    right: -207px;
+  }
+
+  .logo-title {
+    padding: 2rem;
+    margin: 0 0;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 30px;
+    line-height: 36px;
+    max-width: 100px;
+  }
+
+  .text-information {
+    padding: 2rem;
+    font-size: 16px;
+  }
+
+  .btn-group {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    bottom: 0px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+    button {
+      width: 255px;
+      border: none;
+      background: $color-pink-button;
+      margin:8px;
+      padding: 12px;
+      text-align: center;
+      font-size: 24px;
+      color: white;
+      text-transform: uppercase;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  }
+}

@@ -1,9 +1,17 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import SignIn from "./SignIn";
+import { Router } from "react-router-dom";
+import { createBrowserHistory, History } from "history";
+
+const history: History<null> = createBrowserHistory();
 
 const mountComponent = () => {
-  return render(<SignIn />);
+  return render(
+    <Router history={history}>
+      <SignIn />
+    </Router>
+  );
 };
 
 describe("Sign-in is rendered", () => {
