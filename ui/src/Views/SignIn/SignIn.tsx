@@ -1,8 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { signInWithEmailAndPassword } from "./services";
 
-const SignIn = () => {
+const SignIn: React.FC<RouteComponentProps> = () => {
   const handleLogIn = async (e: any) => {
     e.preventDefault();
     const { email, password } = e.target.elements;
