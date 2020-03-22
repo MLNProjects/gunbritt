@@ -10,6 +10,12 @@ interface DataProp {
 export const setTokenAndUser = (data: DataProp) => {
   return {
     type: SET_TOKEN_AND_USERID,
-    payload: { idToken: data.idToken, email: data.email, refreshToken: data.refreshToken, expiresIn: data.expiresIn, userId: data.localId }
+    payload: {
+      idToken: data.idToken,
+      email: data.email,
+      refreshToken: data.refreshToken,
+      expiresIn: data.expiresIn,
+      userId: data.localId
+    }
   };
 };
