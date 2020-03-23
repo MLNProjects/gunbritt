@@ -11,7 +11,7 @@ export const postUserInformation = (
   type: string
 ) => {
   return axios.post(
-    "https://dkdlas.com",
+    "https://randomurl.com",
     {
       userId: userid,
       name: name,

@@ -50,7 +50,6 @@ const UserInformation = () => {
     geo.getCurrentPosition(setLocation, setError);
   }, []);
 
-  console.log(coordinates);
   return (
     <div>
       <h1>Quarentine Helper</h1>
