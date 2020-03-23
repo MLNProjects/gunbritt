@@ -3,8 +3,9 @@ import { signUpWithEmailAndPassword } from "./services";
 import { Context, Provider } from "../../store/reducer";
 import withProvider from "../../store/WithProvider";
 import { setTokenAndUser } from "../../store/actions";
+import { RouteComponentProps } from "react-router-dom";
 
-const SignUp = () => {
+const SignUp: React.FC<RouteComponentProps> = props => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [state, dispatch] = useContext(Context);
   const handleSignUp = async (e: any) => {
@@ -13,7 +14,7 @@ const SignUp = () => {
     try {
       const { data } = await signUpWithEmailAndPassword(email.value, password.value);
       dispatch(setTokenAndUser(data));
-      window.location.href = "/merinfo";
+      props.history.push("/merinfo");
     } catch (err) {
       console.error("Kunde inte registerar");
     }
